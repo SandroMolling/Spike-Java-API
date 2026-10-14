@@ -1,0 +1,29 @@
+### 1. Cadastrar aluno
+POST http://localhost:8081/alunos
+Content-Type: application/json
+
+{
+  "nome": "Sandro",
+  "curso": "Informática para Internet"
+}
+
+### 2. Listar alunos
+GET http://localhost:8081/alunos
+
+### 3. Buscar aluno por ID
+GET http://localhost:8081/alunos/1
+
+### 4. Atualizar aluno
+PUT http://localhost:8081/alunos/1
+Content-Type: application/json
+
+{
+  "nome": "Sandro Molling",
+  "curso": "Informática para Internet"
+}
+
+### 5. Excluir aluno
+DELETE http://localhost:8081/alunos/1
+
+### 6. Conferir exclusão
+GET http://localhost:8081/alunos
