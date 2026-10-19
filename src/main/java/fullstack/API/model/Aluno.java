@@ -1,22 +1,24 @@
 package fullstack.API.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Aluno {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
-    private String curso;
 
-    public Aluno () {
+    private String nome;
+
+    @ManyToOne
+    @JoinColumn(name = "curso_id")
+    private Curso curso;
+
+    public Aluno() {
     }
 
-    public Aluno(Long id, String nome, String curso) {
+    public Aluno(Long id, String nome, Curso curso) {
         this.id = id;
         this.nome = nome;
         this.curso = curso;
@@ -38,11 +40,12 @@ public class Aluno {
         this.nome = nome;
     }
 
-    public String getCurso() {
+    public Curso getCurso() {
         return curso;
     }
 
-    public void setCurso(String curso) {
+    public void setCurso(Curso curso) {
         this.curso = curso;
     }
+
 }
