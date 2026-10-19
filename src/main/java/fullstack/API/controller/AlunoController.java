@@ -2,6 +2,8 @@ package fullstack.API.controller;
 
 import fullstack.API.model.Aluno;
 import fullstack.API.service.AlunoService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,19 +29,19 @@ public class AlunoController {
     }
 
     @PostMapping
-    public Aluno cadastrar(@RequestBody Aluno aluno) {
-        return service.cadastrar(aluno);
+    public ResponseEntity<Aluno> cadastrar(@RequestBody Aluno aluno) {
+        Aluno novoAluno = service.cadastrar(aluno);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoAluno);
     }
 
-    @PutMapping
-    public Aluno atualizar(
-            @PathVariable Long id,
-            @RequestBody Aluno aluno) {
+    @PutMapping("/{id}")
+    public Aluno atualizar(@PathVariable Long id, @RequestBody Aluno aluno) {
         return service.atualizar(id, aluno);
     }
 
-    @DeleteMapping
-    public void excluir(@PathVariable Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluir(@PathVariable Long id) {
         service.excluir(id);
+        return ResponseEntity.noContent().build();
     }
 }

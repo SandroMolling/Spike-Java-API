@@ -2,7 +2,9 @@ package fullstack.API.service;
 
 import fullstack.API.model.Aluno;
 import fullstack.API.repository.AlunoRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -19,10 +21,10 @@ public class AlunoService {
         return repository.findAll();
     }
 
-    public Aluno buscarPorId(Long id){
+    public Aluno buscarPorId(Long id) {
         return repository.findById(id)
-                .orElseThrow(() ->
-                        new RuntimeException("Aluno não encontrado"));
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Aluno não encontrado"));
     }
 
     public Aluno cadastrar(Aluno aluno){
